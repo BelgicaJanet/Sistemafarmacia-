@@ -33,16 +33,16 @@ public class MySql_PedidoDao extends MySQLDaoFactory implements I_Pedido{
 					
 					Statement stmt=con.createStatement();
 				  //String query="select * from t_pedido a INNER JOIN t_persona b ON a.codPersona=b.codPersona INNER JOIN t_estadopedido c ON a.codEstadoPedido=c.codEstadoPedido where b.codDistrito='"+codDistrito+"' and c.descripcion='Pendiente' ORDER BY a.fechaPedido,a.horaPedido";
-					String query="select * from t_pedido a INNER JOIN t_persona b ON a.codPersona=b.codPersona INNER JOIN t_estadopedido c ON a.codEstadoPedido=c.codEstadoPedido inner join t_detallepedido d on a.codPedido=d.codPedido inner join t_sucursal e on d.codSucursal=e.codSucursal  where e.codDistrito="+codDistrito+" and c.descripcion='Pendiente' group by a.codPedido  ORDER BY a.fechaPedido, a.horaPedido";
+					String query="select * from t_pedido a INNER JOIN t_personaaaa b ON a.codPersona=b.codPersona INNER JOIN t_estadopedido c ON a.codEstadoPedido=c.codEstadoPedido inner join t_detallepedido d on a.codPedido=d.codPedido inner join t_sucursal e on d.codSucursal=e.codSucursal  where e.codDistrito="+codDistrito+" and c.descripcion='Pendiente' group by a.codPedido  ORDER BY a.fechaPedido, a.horaPedido";
 					ResultSet rs= stmt.executeQuery(query);
 					while( rs.next() ){
 						PedidoBean obj = new PedidoBean();
 						
-						obj.setCodPedido(rs.getString("a.codPedido"));
-						obj.setFechaPedido(rs.getString("a.fechaPedido"));
-						obj.setHoraPedido(rs.getString("a.horaPedido"));
-						obj.setMontoTotal(rs.getDouble("a.montoTotal"));
-						obj.setMontoCancelar(rs.getDouble("a.montoCancelar"));
+						obj.setCodPedido(rs.getString("a.codPedidoaaa"));
+						obj.setFechaPedido(rs.getString("a.fechaPedidoaaa"));
+						obj.setHoraPedido(rs.getString("a.horaPedidoaaaa"));
+						obj.setMontoTotal(rs.getDouble("a.montoTotalaaa"));
+						obj.setMontoCancelar(rs.getDouble("a.montoCancelaraaa"));
 						obj.setCodPersona(rs.getInt("a.codPersona"));
 						obj.setCodEstadoPedido(rs.getInt("a.codEstadoPedido"));
 						obj.setTipoComprobante(rs.getString("a.tipoComprobante"));
@@ -505,6 +505,7 @@ public class MySql_PedidoDao extends MySQLDaoFactory implements I_Pedido{
 			Statement stmt=con.createStatement();
 		  //String query="select * from t_pedido a INNER JOIN t_persona b ON a.codPersona=b.codPersona INNER JOIN t_estadopedido c ON a.codEstadoPedido=c.codEstadoPedido where a.fechaPedido>='"+fecIn+"' and a.fechaPedido<='"+fecFi+"' and b.codDistrito='"+codDistrito+"' and (c.descripcion='Terminado' or c.descripcion='Cancelado') ORDER BY a.fechaPedido desc, a.horaPedido desc";
 			String query="select * from t_pedido a INNER JOIN t_personas b ON a.codPersona=b.codPersona INNER JOIN t_estadopedidos c ON a.codEstadoPedido=c.codEstadoPedido inner join t_detallepedido d on a.codPedido=d.codPedido inner join t_sucursal e on d.codSucursal=e.codSucursal where a.fechaPedido>='"+fecIn+"' and a.fechaPedido<='"+fecFi+"' and e.codDistrito='"+codDistrito+"' and (c.descripcion='Terminado' or c.descripcion='Cancelado') group by a.codPedido ORDER BY a.fechaPedido desc, a.horaPedido desc";
+			System.out.println(query);
 			ResultSet rs= stmt.executeQuery(query);
 			while( rs.next() ){
 				PedidoBean obj = new PedidoBean();
