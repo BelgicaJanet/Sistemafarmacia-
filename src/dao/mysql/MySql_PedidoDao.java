@@ -504,14 +504,14 @@ public class MySql_PedidoDao extends MySQLDaoFactory implements I_Pedido{
 			
 			Statement stmt=con.createStatement();
 		  //String query="select * from t_pedido a INNER JOIN t_persona b ON a.codPersona=b.codPersona INNER JOIN t_estadopedido c ON a.codEstadoPedido=c.codEstadoPedido where a.fechaPedido>='"+fecIn+"' and a.fechaPedido<='"+fecFi+"' and b.codDistrito='"+codDistrito+"' and (c.descripcion='Terminado' or c.descripcion='Cancelado') ORDER BY a.fechaPedido desc, a.horaPedido desc";
-			String query="select * from t_pedido a INNER JOIN t_persona b ON a.codPersona=b.codPersona INNER JOIN t_estadopedido c ON a.codEstadoPedido=c.codEstadoPedido inner join t_detallepedido d on a.codPedido=d.codPedido inner join t_sucursal e on d.codSucursal=e.codSucursal where a.fechaPedido>='"+fecIn+"' and a.fechaPedido<='"+fecFi+"' and e.codDistrito='"+codDistrito+"' and (c.descripcion='Terminado' or c.descripcion='Cancelado') group by a.codPedido ORDER BY a.fechaPedido desc, a.horaPedido desc";
+			String query="select * from t_pedido a INNER JOIN t_personas b ON a.codPersona=b.codPersona INNER JOIN t_estadopedidos c ON a.codEstadoPedido=c.codEstadoPedido inner join t_detallepedido d on a.codPedido=d.codPedido inner join t_sucursal e on d.codSucursal=e.codSucursal where a.fechaPedido>='"+fecIn+"' and a.fechaPedido<='"+fecFi+"' and e.codDistrito='"+codDistrito+"' and (c.descripcion='Terminado' or c.descripcion='Cancelado') group by a.codPedido ORDER BY a.fechaPedido desc, a.horaPedido desc";
 			ResultSet rs= stmt.executeQuery(query);
 			while( rs.next() ){
 				PedidoBean obj = new PedidoBean();
-				obj.setCodPedido(rs.getString("a.codPedido"));
-				obj.setFechaPedido(rs.getString("a.fechaPedido"));
-				obj.setHoraPedido(rs.getString("a.horaPedido"));
-				obj.setMontoTotal(rs.getDouble("a.montoTotal"));
+				obj.setCodPedido(rs.getString("a.codPedidos"));
+				obj.setFechaPedido(rs.getString("a.fechaPedidos"));
+				obj.setHoraPedido(rs.getString("a.horaPedidos"));
+				obj.setMontoTotal(rs.getDouble("a.montoTotals"));
 				obj.setMontoCancelar(rs.getDouble("a.montoCancelar"));
 				obj.setCodPersona(rs.getInt("a.codPersona"));
 				obj.setCodEstadoPedido(rs.getInt("a.codEstadoPedido"));
